@@ -80,8 +80,8 @@ prompt_command () {
 		PS1+='${DPC}[${PRC}\u${DPC}@${AXC}\H${DPC}]'
 	fi
 
-	PS1+='\n${ASC}$? '
-	PS1+='${AXC}\$ :$RES '
+	PS1+='\n\[${ASC}\]$? '
+	PS1+='\[${AXC}\]\$ :\[$RES\] '
 }
 
 PROMPT_COMMAND='prompt_command'
