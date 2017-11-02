@@ -20,6 +20,8 @@ case ${TERM} in
 		;;
 esac
 
+cores=$(awk '/cpu cores/ { print $4; exit }' /proc/cpuinfo)
+
 # Prints the git username, email and current branch
 git_branch_prompt () {
 	local bn=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
@@ -60,9 +62,9 @@ prompt_command () {
 	avg_str=$LPC
 	avg_1m=$(awk "BEGIN {print ${avg[0]} * 100}")
 
-	if [ "$avg_1m" -ge 85 ]; then
+	if [ "$avg_1m" -ge $(( 85 * $cores )) ]; then
 		avg_str=$ASC
-	elif [ "$avg_1m" -gt 60 ]; then
+	elif [ "$avg_1m" -gt $(( 60 * $cores )) ]; then
 		avg_str=$SEC
 	fi
 	avg_str+=${avg[*]}
