@@ -58,8 +58,7 @@ prompt_command () {
 	RAM_str+=$free_RAM
 
 	avg_str=$LPC
-	avg_1m=$(awk "BEGIN {print ${avg[0]}}")
-	avg_1m=${avg_1m%.*}
+	avg_1m=$(awk "BEGIN {print ${avg[0]} * 100}")
 
 	if [ "$avg_1m" -ge 85 ]; then
 		avg_str=$ASC
