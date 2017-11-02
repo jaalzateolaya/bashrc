@@ -62,9 +62,9 @@ prompt_command () {
 	avg_str=$LPC
 	avg_1m=$(awk "BEGIN {print ${avg[0]} * 100}")
 
-	if [ "$avg_1m" -ge $(( 85 * $cores )) ]; then
+	if [ "$avg_1m" -ge $(( 100 * $cores )) ]; then # Alarm state
 		avg_str=$ASC
-	elif [ "$avg_1m" -gt $(( 60 * $cores )) ]; then
+	elif [ "$avg_1m" -gt $(( 70 * $cores )) ]; then # Warning state
 		avg_str=$SEC
 	fi
 	avg_str+=${avg[*]}
