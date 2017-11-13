@@ -93,6 +93,9 @@ export EDITOR=vim
 # Avoid succesive duplicates in the bash command history.
 export HISTCONTROL=ignoredups
 
+# Set the history file into the bash directory
+export HISTFILE=~/.bashrc.d/history
+
 # Append commands to the bash command history file (~/.bash_history)
 # instead of overwriting it.
 shopt -s histappend
@@ -101,9 +104,12 @@ shopt -s histappend
 # instead of after closing the session.
 #PROMPT_COMMAND='history -a'
 
-# Add bash aliases.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+# Load aliases
+if test -d ~/.bashrc.d/aliases/; then
+	for aliases in ~/.bashrc.d/aliases/*.sh; do
+		test -r "$aliases" && . "$aliases"
+	done
+	unset aliases
 fi
 
 setxkbmap -layout es 2>/dev/null
