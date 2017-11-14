@@ -17,8 +17,8 @@ for i in $DIR/bash*; do
 		cp --update --target-directory=$HOME/.$i --recursive $DIR/$i/*
 
 		# Define permissions
-		find "$HOME/.$i" -type d -exec chmod 0500 {} \;
-		find "$HOME/.$i" -type f -exec chmod 0400 {} \;
+		find "$HOME/.$i" -type d -exec chmod 0700 {} \;
+		find "$HOME/.$i" -type f -exec chmod 0500 {} \;
 	else
 		install -m 0600 {$DIR/,$HOME/.}$i
 	fi
