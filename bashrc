@@ -16,6 +16,9 @@ shopt -s histappend
 # Load env
 source_folder ~/.bashrc.d/env
 
+# Load lib
+source_folder ~/.bashrc.d/lib
+
 # Load aliases
 if test -d ~/.bashrc.d/aliases/; then
 	for aliases in ~/.bashrc.d/aliases/*.sh; do
