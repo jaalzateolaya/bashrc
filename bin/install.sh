@@ -18,7 +18,7 @@ for i in $DIR/bash*; do
 
 		# Define permissions
 		find "$HOME/.$i" -type d -exec chmod 0700 {} \;
-		find "$HOME/.$i" -type f -exec chmod 0500 {} \;
+		find "$HOME/.$i" -type f -exec chmod 0600 {} \;
 	else
 		install -m 0600 {$DIR/,$HOME/.}$i
 	fi
