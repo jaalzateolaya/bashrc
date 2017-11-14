@@ -96,24 +96,12 @@ prompt_command () {
 	PS1+='\[${AXC}\]\$ :\[$RES\] '
 }
 
-PROMPT_COMMAND='prompt_command'
-
-# Set the default editor to vim.
-export EDITOR=vim
-
-# Avoid succesive duplicates in the bash command history.
-export HISTCONTROL=ignoredups
-
-# Set the history file into the bash directory
-export HISTFILE=~/.bashrc.d/history
-
 # Append commands to the bash command history file (~/.bash_history)
 # instead of overwriting it.
 shopt -s histappend
 
-# Append commands to the history every time a prompt is shown,
-# instead of after closing the session.
-#PROMPT_COMMAND='history -a'
+# Load env
+source_folder ~/.bashrc.d/env
 
 # Load aliases
 if test -d ~/.bashrc.d/aliases/; then
