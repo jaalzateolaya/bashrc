@@ -9,7 +9,6 @@ source_folder () {
 	fi
 }
 
-# Set the PS1 prompt (with colors).
 case ${TERM} in
 	xterm*|rxvt*|Eterm|aterm|kterm|gnome*|screen*)
 		PRC=$(tput setaf 33)  # Primary Color
@@ -82,6 +81,7 @@ prompt_command () {
 
 	printf "$FMT" "$RAM_str" "$avg_str"
 
+	# Set the PS1 prompt (with colors).
 	PS1='${DPC}[${AXC}\l \j \!${DPC}]\n'
 	PS1+='${LPC}\t \d '
 	PS1+='${AXC}\w/\n'
