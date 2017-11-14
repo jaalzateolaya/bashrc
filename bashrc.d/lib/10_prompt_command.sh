@@ -1,3 +1,6 @@
+# Load color definitions
+[ -e ~/.bashrc.d/inc/named_colors.sh ] && . ~/.bashrc.d/inc/named_colors.sh
+
 cores=$(awk '/cpu cores/ { print $4; exit }' /proc/cpuinfo)
 
 prompt_command () {
