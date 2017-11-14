@@ -1,3 +1,14 @@
+# Sources a folder
+source_folder () {
+	local folder=$1
+
+	if [ -d "$folder" ]; then
+		for file in "$folder"/*.sh; do
+			test -r "$file" && . "$file"
+		done
+	fi
+}
+
 # Set the PS1 prompt (with colors).
 case ${TERM} in
 	xterm*|rxvt*|Eterm|aterm|kterm|gnome*|screen*)
