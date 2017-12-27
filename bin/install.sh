@@ -6,22 +6,30 @@ announce () {
 	echo $(date +%c): ${1}...
 }
 
-for i in $DIR/bash*; do
-	i=$(basename $i)
-	announce "Installing $i";
-	if [ -d "$DIR/$i" ]; then
-		# Create the directory
-		[ ! -d "$HOME/.$i" ] && mkdir "$HOME/.$i"
+bashrc_install () {
+	[ ! -e "$1" -o -z "$2" ] || git check-ignore -q $1 && return -1;
 
-		# Copy the directory content
-		cp --update --target-directory=$HOME/.$i --recursive $DIR/$i/*
+	local src=$(basename $1)
+	local dir=${1%$src}
+	local prefix=$3
+	local dst="${2}/${prefix}${src}"
 
-		# Define permissions
-		find "$HOME/.$i" -type d -exec chmod 0700 {} \;
-		find "$HOME/.$i" -type f -exec chmod 0600 {} \;
+	announce "Installing $src";
+
+	if [ -d "$dir/$src" ]; then
+		# Create the target directory
+		[ ! -d  "$dst" ] && mkdir -m 0700 "$dst"
+
+		for f in $dir/$src/*; do
+			bashrc_install $f $dst
+		done;
 	else
-		install -m 0600 {$DIR/,$HOME/.}$i
+		install -m 0600 "$dir/$src" "$dst"
 	fi
+}
+
+for i in $DIR/bash*; do
+	bashrc_install "$i" "$HOME" "."
 done
 
 announce "Finished!"
