@@ -7,7 +7,7 @@ announce () {
 }
 
 bashrc_install () {
-	[ ! -e "$1" -o -z "$2" ] && return -1;
+	[ ! -e "$1" -o -z "$2" ] || git check-ignore -q $1 && return -1;
 
 	local src=$(basename $1)
 	local dir=${1%$src}
