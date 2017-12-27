@@ -44,7 +44,7 @@ prompt_command () {
 		PS1+='${DPC}[${PRC}\u${DPC}@${AXC}\H${DPC}]'
 	fi
 
-	PS1+='\n\[${ASC}\]$? '
+	PS1+='\n\[$(out=$?; test $out -eq 0 && echo ${DPC} || echo ${ASC}; exit $out)\]$? '
 	PS1+='\[${AXC}\]\$ :\[$RES\] '
 }
 
