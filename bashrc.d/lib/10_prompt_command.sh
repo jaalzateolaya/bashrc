@@ -35,7 +35,6 @@ prompt_command () {
 
 	# Set the PS1 prompt (with colors).
 	PS1='${DPC}[${AXC}\l \j \!${DPC}]\n'
-	PS1+='${LPC}\t \d '
 	PS1+='${AXC}\w/\n'
 
 	if [ -d ".git" ]; then
