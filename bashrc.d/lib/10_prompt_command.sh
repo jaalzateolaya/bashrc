@@ -4,7 +4,7 @@
 cores=$(awk '/cpu cores/ { print $4; exit }' /proc/cpuinfo)
 
 prompt_command () {
-	local FMT="\n${PRC}Free RAM: %b%% ${PRC}Load AVG: %b${RES} "
+	local FMT="${PRC}Free RAM: %b%% ${PRC}Load AVG: %b${RES} "
 
 	local avg=( $(awk '{ print $1, $2, $3 }' /proc/loadavg) )
 	local free_RAM=$(awk '
@@ -30,6 +30,12 @@ prompt_command () {
 		avg_str=$SEC
 	fi
 	avg_str+=${avg[*]}
+
+	if [[ -z "${NEWLINE}" ]]; then
+		NEWLINE=true
+	else
+		printf '\n'
+	fi
 
 	printf "$FMT" "$RAM_str" "$avg_str"
 
