@@ -35,15 +35,18 @@ prompt_command () {
 
 	# Set the PS1 prompt (with colors).
 	PS1='${DPC}[${AXC}\l \j \!${DPC}]\n'
-	PS1+='${AXC}\w/\n'
 
+	PS1+='${DPC}['
 	if [ -d ".git" ]; then
-		PS1+=$(git_branch_prompt)
+		PS1+=$(git_user_prompt)
 	else
-		PS1+='${DPC}[${PRC}\u${DPC}@${AXC}\H${DPC}]'
+		PS1+='${PRC}\u${DPC}@${AXC}\H'
 	fi
+	PS1+='${DPC}]'
 
-	PS1+='\n\[$(out=$?; test $out -eq 0 && echo ${DPC} || echo ${ASC}; exit $out)\]$? '
+	PS1+='\n${AXC}\w/\n'
+	[ -d ".git" ] && PS1+='\[${DPC}\]('$(git_branch_prompt)'\[${DPC}\]) '
+	PS1+='\[$(out=$?; test $out -eq 0 && echo ${DPC} || echo ${ASC}; exit $out)\]$? '
 	PS1+='\[${AXC}\]\$ :\[$RES\] '
 }
 
