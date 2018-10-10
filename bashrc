@@ -21,6 +21,8 @@ source_folder $BASHRCD/env
 source_folder $BASHRCD/lib
 # Load aliases
 source_folder $BASHRCD/aliases
+# Load completions
+source_folder $BASHRCD/completion
 
 setxkbmap -layout es 2>/dev/null
 
