@@ -20,12 +20,7 @@ source_folder ~/.bashrc.d/env
 source_folder ~/.bashrc.d/lib
 
 # Load aliases
-if test -d ~/.bashrc.d/aliases/; then
-	for aliases in ~/.bashrc.d/aliases/*.sh; do
-		test -r "$aliases" && . "$aliases"
-	done
-	unset aliases
-fi
+source_folder ~/.bashrc.d/aliases
 
 setxkbmap -layout es 2>/dev/null
 
