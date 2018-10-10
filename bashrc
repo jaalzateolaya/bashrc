@@ -9,18 +9,18 @@ source_folder () {
 	fi
 }
 
+export BASHRCD=~/.bashrc.d
+
 # Append commands to the bash command history file (~/.bash_history)
 # instead of overwriting it.
 shopt -s histappend
 
 # Load env
-source_folder ~/.bashrc.d/env
-
+source_folder $BASHRCD/env
 # Load lib
-source_folder ~/.bashrc.d/lib
-
+source_folder $BASHRCD/lib
 # Load aliases
-source_folder ~/.bashrc.d/aliases
+source_folder $BASHRCD/aliases
 
 setxkbmap -layout es 2>/dev/null
 
