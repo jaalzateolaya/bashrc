@@ -1,7 +1,9 @@
 #
 # Completion for git:
 #
+# git [command]
 # git checkout [branch]
+# git merge --no-ff [branch]
 
 _git ()
 {
@@ -19,6 +21,9 @@ _git ()
 			opts=$( find /usr/lib/git-core -executable | sed 's/.*git-//g' )
 			;;
 		checkout)
+			opts=$( git branch --format '%(refname:short)' )
+			;;
+		--no-ff)
 			opts=$( git branch --format '%(refname:short)' )
 			;;
 	esac
