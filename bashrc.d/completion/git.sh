@@ -5,7 +5,7 @@
 
 _git ()
 {
-	local cur prev
+	local cur prev opts
 
 	if ! git status &>/dev/null; then
 		return 0
@@ -15,13 +15,15 @@ _git ()
 	prev=${COMP_WORDS[COMP_CWORD - 1]}
 
 	case "$prev" in
-		checkout)
-			local branches=$( git branch --format '%(refname:short)' | paste -sd ' ' )
-			COMPREPLY=( $( compgen -W "$branches" -- $cur ) )
+		git)
+			opts=$( find /usr/lib/git-core -executable | sed 's/.*git-//g' )
 			;;
-		add)
-			COMPREPLY=( $( compgen -W "" ) )
+		checkout)
+			opts=$( git branch --format '%(refname:short)' )
+			;;
 	esac
+
+	COMPREPLY=( $( compgen -W "$opts" -- $cur ) )
 
 	return 0
 }
