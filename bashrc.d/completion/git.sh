@@ -20,10 +20,7 @@ _git ()
 		git)
 			opts=$( find /usr/lib/git-core -executable | sed 's/.*git-//g' )
 			;;
-		checkout)
-			opts=$( git branch --format '%(refname:short)' )
-			;;
-		--no-ff)
+		checkout|--no-ff)
 			opts=$( git branch --format '%(refname:short)' )
 			;;
 	esac
