@@ -2,9 +2,10 @@
 # Completion for git:
 #
 # git [command]
-# git checkout [branch]
-# git merge --no-ff [branch]
-# git rebase (-i|--interactive) [branch]
+# git branch (options) [branch]
+# git checkout (options) [branch]
+# git merge (options) [branch]
+# git rebase (options) [branch]
 
 _git ()
 {
@@ -17,14 +18,16 @@ _git ()
 	cur=${COMP_WORDS[COMP_CWORD]}
 	prev=${COMP_WORDS[COMP_CWORD - 1]}
 
-	case "$prev" in
-		git)
-			opts=$( find /usr/lib/git-core -executable | sed 's/.*git-//g' )
-			;;
-		checkout|--no-ff|rebase|-i|--interactive)
-			opts=$( git branch --format '%(refname:short)' )
-			;;
-	esac
+	if [ "$prev" = "git" ]; then
+		opts=$( find /usr/lib/git-core -executable | sed 's/.*git-//g' )
+	else
+		case "${COMP_WORDS[1]}" in
+			branch|checkout|merge|rebase)
+				opts=$( git branch --format '%(refname:short)' )
+				;;
+		esac
+	fi
+
 
 	COMPREPLY=( $( compgen -W "$opts" -- $cur ) )
 
