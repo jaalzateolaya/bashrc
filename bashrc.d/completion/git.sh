@@ -4,6 +4,7 @@
 # git [command]
 # git checkout [branch]
 # git merge --no-ff [branch]
+# git rebase (-i|--interactive) [branch]
 
 _git ()
 {
@@ -20,7 +21,7 @@ _git ()
 		git)
 			opts=$( find /usr/lib/git-core -executable | sed 's/.*git-//g' )
 			;;
-		checkout|--no-ff)
+		checkout|--no-ff|rebase|-i|--interactive)
 			opts=$( git branch --format '%(refname:short)' )
 			;;
 	esac
