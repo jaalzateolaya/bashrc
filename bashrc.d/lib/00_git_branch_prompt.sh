@@ -6,10 +6,12 @@ git_branch_prompt () {
 	local bn=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 	local clr=""
 
-	if [ "$bn" = "master" ]; then
+	if [ -z "${bn##prod*}" ]; then
 		clr=${ASC}
-	elif [ -z "${bn##devel*}" ]; then
+	elif [ "$bn" = "master" ]; then
 		clr=${SEC}
+	elif [ -z "${bn##*/*}" ]; then
+		clr=${LPC}
 	else
 		clr=${AXC}
 	fi
