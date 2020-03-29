@@ -4,7 +4,7 @@ case ${TERM} in
 		DPC=$(tput setaf 27)  # Dark Primary Color
 		LPC=$(tput setaf 39)  # Light Primary Color
 		SEC=$(tput setaf 130) # Secondary Color (Orange)
-		ASC=$(tput setaf 160) # Ascent Color (Red)
+		ASC=$(tput setaf 202) # Ascent Color (Orange)
 		AXC=$(tput setaf 246) # Auxiliary Color (Gray)
 		RES=$(tput sgr0)      # Reset
 		;;
