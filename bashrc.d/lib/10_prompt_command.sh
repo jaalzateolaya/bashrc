@@ -4,7 +4,7 @@
 cores=$(awk '/cpu cores/ { print $4; exit }' /proc/cpuinfo)
 
 prompt_command () {
-	local FMT="${PRC}Free RAM: %b%% ${PRC}Load AVG: %b${RES} "
+	local FMT="${PRC}Free RAM: %b%%${RES} | ${PRC}Load AVG: %b${RES}"
 
 	local avg=( $(awk '{ print $1, $2, $3 }' /proc/loadavg) )
 	local free_RAM=$(awk '
@@ -40,19 +40,19 @@ prompt_command () {
 	printf "$FMT" "$RAM_str" "$avg_str"
 
 	# Set the PS1 prompt (with colors).
-	PS1='${DPC}[${AXC}\l \j \!${DPC}]\n'
+	PS1=' | ${PRC}Return status: \[$(out=$?; test $out -eq 0 && echo ${LPC} || echo ${ASC}; exit $out)\]$?\n'
 
-	PS1+='${DPC}['
+	PS1+='${AXC}\w/\n'
+
+	PS1+='${DPC}'
 	if [ -d ".git" ]; then
 		PS1+=$(git_user_prompt)
 	else
 		PS1+='${PRC}\u${DPC}@${AXC}\H'
 	fi
-	PS1+='${DPC}]'
+	PS1+='${DPC}\n'
 
-	PS1+='\n${AXC}\w/\n'
 	[ -d ".git" ] && PS1+='\[${DPC}\]('$(git_branch_prompt)'\[${DPC}\]) '
-	PS1+='\[$(out=$?; test $out -eq 0 && echo ${DPC} || echo ${ASC}; exit $out)\]$? '
-	PS1+='\[${AXC}\]\$ :\[$RES\] '
+	PS1+='\[${AXC}\]\$:\[$RES\] '
 }
 
