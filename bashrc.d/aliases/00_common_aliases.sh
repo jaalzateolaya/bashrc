@@ -11,7 +11,7 @@ alias ln='ln -v'
 
 # Make grep more user frendly by highlighting matches
 # and exclude grepping through .svn folders.
-alias grep='grep -n --color=auto --exclude-dir={\.svn,\.git,node_modules}'
+alias grep='grep -sn --color=auto --exclude-dir={\.svn,\.git,node_modules}'
 
 if [ -f /etc/profile.d/coreutils.sh ]; then
 	source /etc/profile.d/coreutils.sh
