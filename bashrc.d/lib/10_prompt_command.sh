@@ -13,6 +13,9 @@ prompt_command () {
 			END { printf "%d", 100 * a / t }
 		' /proc/meminfo)
 
+	git branch >/dev/null 2>/dev/null
+	local IS_GIT_FOLDER=$?
+
 	RAM_str=$LPC
 	if [ "$free_RAM" -le 15 ]; then
 		RAM_str=$ASC
@@ -45,14 +48,17 @@ prompt_command () {
 	PS1+='${AXC}\w/\n'
 
 	PS1+='${DPC}'
-	if [ -d ".git" ]; then
+	if [ $IS_GIT_FOLDER -eq 0 ]; then
 		PS1+=$(git_user_prompt)
 	else
 		PS1+='${PRC}\u${DPC}@${AXC}\H'
 	fi
 	PS1+='${DPC}\n'
 
-	[ -d ".git" ] && PS1+='\[${DPC}\]('$(git_branch_prompt)'\[${DPC}\]) '
+	if [ $IS_GIT_FOLDER -eq 0 ] ; then
+	   	PS1+='\[${DPC}\]('$(git_branch_prompt)'\[${DPC}\]) '
+	fi
+
 	PS1+='\[${AXC}\]\$:\[$RES\] '
 }
 
