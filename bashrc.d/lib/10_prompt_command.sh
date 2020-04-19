@@ -45,8 +45,6 @@ prompt_command () {
 	# Set the PS1 prompt (with colors).
 	PS1=' | ${PRC}Return status: \[$(out=$?; test $out -eq 0 && echo ${LPC} || echo ${ASC}; exit $out)\]$?\n'
 
-	PS1+='${AXC}\w/\n'
-
 	PS1+='${DPC}'
 	if [ $IS_GIT_FOLDER -eq 0 ]; then
 		PS1+=$(git_user_prompt)
