@@ -7,5 +7,8 @@ export EDITOR=vim
 # Avoid succesive duplicates in the bash command history.
 export HISTCONTROL=ignoredups
 
+# Increas history size
+export HISTSIZE=100000
+
 # Set the history file into the bashrc directory
 export HISTFILE=~/.bashrc.d/history
