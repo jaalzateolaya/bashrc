@@ -24,5 +24,3 @@ source_folder $BASHRCD/aliases
 # Load completions
 source_folder $BASHRCD/completion
 
-setxkbmap -layout es 2>/dev/null
-
