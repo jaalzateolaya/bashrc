@@ -22,7 +22,7 @@ _git ()
 		opts=$( find /usr/lib/git-core -executable | sed 's/.*git-//g' )
 	else
 		case "${COMP_WORDS[1]}" in
-			branch|checkout|merge|rebase)
+			branch|checkout|switch|merge|rebase)
 				opts=$( git branch --format '%(refname:short)' )
 				;;
 		esac
